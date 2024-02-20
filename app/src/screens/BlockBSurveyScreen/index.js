@@ -1144,7 +1144,7 @@ const BlockBSurveyScreen = () => {
                                         selectedItems={selectedDigitalpreferred}
                                         selectText="Select open a bank account"
                                         onChangeInput={(text) => console.log(text)}
-                                        altFontFamily="ProximaNova-Light"
+                                        // altFontFamily="ProximaNova-Light"
                                         tagRemoveIconColor="#000"
                                         tagBorderColor="#000"
                                         tagTextColor="#000"
