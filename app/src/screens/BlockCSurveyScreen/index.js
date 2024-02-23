@@ -1,13 +1,13 @@
 import { Text, View, Image, SafeAreaView, Dimensions, TouchableOpacity, StatusBar, useWindowDimensions, ActivityIndicator, TextInput, Alert, BackHandler, ScrollView, StyleSheet } from 'react-native'
 import React, { Component, useCallback, useRef } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AsyncStorageContaints from '../../../utility/AsyncStorageConstants'; 
+import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Dropdown } from 'react-native-element-dropdown';
 import RadioButtonRN from 'radio-buttons-react-native';
-import MultiSelect from 'react-native-multiple-select'; 
+import MultiSelect from 'react-native-multiple-select';
 import AudioRecord from 'react-native-audio-record';
 import Modal from 'react-native-modal';
 import Axios from 'axios';
@@ -155,13 +155,13 @@ const BlockCSurveyScreen = () => {
     ]
 
     const reason = [
-        { id: 1, lable: 'Don’t need' },
-        { id: 2, lable: 'Don’t know the process' },
-        { id: 3, lable: 'No nearby branch/BC' },
-        { id: 4, lable: 'Lack of awareness' },
-        { id: 5, lable: 'Lack of / insufficient collateral' },
-        { id: 6, lable: 'High Rate of Interest/Cost' },
-        { id: 7, lable: 'Fear of harassment by the recovery agent' },
+
+        { id: 1, lable: 'Don’t know the process' },
+        { id: 2, lable: 'No nearby branch/BC' },
+        { id: 3, lable: 'Lack of awareness' },
+        { id: 4, lable: 'Lack of / insufficient collateral' },
+        { id: 5, lable: 'High Rate of Interest/Cost' },
+        { id: 6, lable: 'Fear of harassment by the recovery agent' },
     ]
 
     const refuseReason = [
@@ -615,7 +615,7 @@ const BlockCSurveyScreen = () => {
                     'response2': "",
                     'response3': "",
                     'response4': "",
-                    "response": `${loanEnroll}`
+                    "response": loanEnroll === null ? "" : `${loanEnroll}`
                 },
                 {
                     "section_no": "C",
@@ -628,7 +628,7 @@ const BlockCSurveyScreen = () => {
                     'response2': "",
                     'response3': "",
                     'response4': "",
-                    "response": `${amount}`
+                    "response": amount === null ? "" : `${amount}`
                 },
                 {
                     "section_no": "C",
@@ -984,6 +984,7 @@ const BlockCSurveyScreen = () => {
                                             onSelectedItemsChange={(items) =>
                                                 onSelectedLoanType(items)
                                             }
+                                            searchIcon
                                             selectedItems={selectedLoantype}
                                             selectText="Select Loan type"
                                             onChangeInput={(text) => console.log(text)}

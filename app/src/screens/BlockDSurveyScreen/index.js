@@ -135,7 +135,9 @@ const BlockDSurveyScreen = () => {
         { id: 1, lable: 'Don’t need it' },
         { id: 2, lable: 'Don’t trust' },
         { id: 3, lable: 'No money to pay premium' },
-        { id: 4, lable: 'Any other reason' },
+        { id: 4, lable: 'Don’t know the process / Not aware' },
+        { id: 5, lable: 'Don’t know where to approach' },
+        { id: 6, lable: 'Any other reason' },
     ]
 
     const enrolPlace = [
@@ -145,10 +147,9 @@ const BlockDSurveyScreen = () => {
         { id: 4, lable: 'Insurance Agent ' },
     ]
     const enrolReason = [
-        { id: 1, lable: 'Needed the product ' },
-        { id: 2, lable: 'Liked the benefits' },
-        { id: 3, lable: 'Enrolled by the bank on its own' },
-        { id: 4, lable: 'Convinced by Family/Friends' },
+        { id: 1, lable: 'Needed the product/liked the benefits ' },
+        { id: 2, lable: 'Enrolled by the bank/ BC on its own' },
+        { id: 3, lable: 'Convinced by Family/Friends' },
     ]
 
     const InsuranceInactiveReason = [

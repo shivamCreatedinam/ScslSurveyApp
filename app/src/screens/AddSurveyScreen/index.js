@@ -1,16 +1,16 @@
 import { Text, View, Image, SafeAreaView, Dimensions, TouchableOpacity, StatusBar, useWindowDimensions, ActivityIndicator, TextInput, Alert, BackHandler, ScrollView, StyleSheet } from 'react-native'
 import React, { Component, useCallback } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AsyncStorageContaints from '../../../utility/AsyncStorageConstants'; 
+import AsyncStorageContaints from '../../../utility/AsyncStorageConstants';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Dropdown } from 'react-native-element-dropdown';
 import RadioButtonRN from 'radio-buttons-react-native';
-import MultiSelect from 'react-native-multiple-select'; 
+import MultiSelect from 'react-native-multiple-select';
 import AudioRecord from 'react-native-audio-record';
 import Modal from 'react-native-modal';
-import Axios from 'axios'; 
+import Axios from 'axios';
 // import fs from 'fs';
 
 const AddSurveyScreen = () => {
@@ -48,9 +48,10 @@ const AddSurveyScreen = () => {
     // lable fields. 
     const [surveryName, setSurveyName] = React.useState('Not to be recorded');
     const [gender, setGender] = React.useState('');
-    const [age, setAgeNumber] = React.useState(0);
-    const [adult, setAdults] = React.useState(0);
-    const [children, setChildren] = React.useState(0);
+    const [age, setAgeNumber] = React.useState('');
+    const [member, setMember] = React.useState('');
+    const [adult, setAdults] = React.useState('');
+    const [children, setChildren] = React.useState('');
     const [selectedEducation, setSelectedEducation] = React.useState([]);
     const [selectedOccupations, setSelectedOccupations] = React.useState([]);
     const [selectedIncomes, setSelectedIncomes] = React.useState([]);
@@ -280,20 +281,28 @@ const AddSurveyScreen = () => {
                                         if (differentlyAble !== '') {
                                             if (adult !== '') {
                                                 if (children !== '') {
-                                                    if (anyGroup !== '') {
-                                                        if (smartPhone !== '') {
-                                                            stopRecording();
+                                                    if (member !== '') {
+                                                        if (anyGroup !== '') {
+                                                            if (smartPhone !== '') {
+                                                                stopRecording();
+                                                            } else {
+                                                                showMessage({
+                                                                    message: "Please Select SmartPhone Own!",
+                                                                    description: "Please Select SmartPhone Own!",
+                                                                    type: "danger",
+                                                                });
+                                                            }
                                                         } else {
                                                             showMessage({
-                                                                message: "Please Select SmartPhone Own!",
-                                                                description: "Please Select SmartPhone Own!",
+                                                                message: "Please Select Any Group Part!",
+                                                                description: "Please Select Any Group Part SHG/JLG!",
                                                                 type: "danger",
                                                             });
                                                         }
                                                     } else {
                                                         showMessage({
-                                                            message: "Please Select Any Group Part!",
-                                                            description: "Please Select Any Group Part SHG/JLG!",
+                                                            message: "Please Select Earning Members!",
+                                                            description: "Please Select Earning Members!",
                                                             type: "danger",
                                                         });
                                                     }
@@ -750,7 +759,13 @@ const AddSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>10. Are you part of any group (SHG/JLG or formal group) ?</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>10. Number of earning members in the household</Text>
+                            <TextInput onChangeText={(e) => setMember(e)} style={{ backgroundColor: '#fff', paddingLeft: 15 }} placeholder='Actual No.' keyboardType={'number-pad'} maxLength={2} value={member} />
+                        </View>
+
+                        <View style={{ padding: 10, }} />
+                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>11. Are you part of any group (SHG/JLG or formal group) ?</Text>
                             <RadioButtonRN
                                 data={dataGroup}
                                 selectedBtn={(e) => setAnyGroup(e)}
@@ -758,7 +773,7 @@ const AddSurveyScreen = () => {
                         </View>
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>11. Do you own a smartphone ?</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>12. Do you own a smartphone ?</Text>
                             <RadioButtonRN
                                 data={smartphone}
                                 selectedBtn={(e) => setSmartphone(e)}

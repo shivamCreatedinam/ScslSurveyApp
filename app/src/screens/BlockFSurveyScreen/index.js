@@ -124,7 +124,7 @@ const BlockFSurveyScreen = () => {
     const possessnecessary = [
         { id: 1, lable: 'Yes, I know it all ' },
         { id: 2, lable: 'Yes, but I want to know more' },
-        { id: 3, lable: 'No, I want to know' },
+        { id: 3, lable: 'No, I don’t want to know' },
     ];
 
     const languagewhich = [
@@ -1582,6 +1582,7 @@ const BlockFSurveyScreen = () => {
                                     onSelectedItemsChange={(items) =>
                                         onSelectedReasonInfoRelating(items)
                                     }
+                                  
                                     selectedItems={InformationRelatingValue}
                                     selectText="Select Reason"
                                     onChangeInput={(text) => console.log(text)}

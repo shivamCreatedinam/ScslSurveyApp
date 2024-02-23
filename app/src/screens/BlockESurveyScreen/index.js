@@ -124,7 +124,9 @@ const BlockESurveyScreen = () => {
         { id: 1, lable: 'Don’t need it' },
         { id: 2, lable: 'Don’t trust' },
         { id: 3, lable: 'No money to pay subscription' },
-        { id: 4, lable: 'Any other reason ' },
+        { id: 4, lable: 'Don’t know the process / Not aware' },
+        { id: 5, lable: 'Don’t know where to approach' },
+        { id: 6, lable: 'Any other reason ' },
     ]
 
     const SelectedReasonTypeLabels = selectedReason.map((selectedId) => {
