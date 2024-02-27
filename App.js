@@ -19,6 +19,8 @@ import {
   FlatList,
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorageContaints from './app/utility/AsyncStorageConstants';
 
 const App = () => {
 
@@ -30,8 +32,38 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  Geolocation.getCurrentPosition(
+    (position) => {
+      console.log("position", position)
+      //getting the Longitude from the location json
+      const currentLongitude = JSON.stringify(position.coords.longitude);
+      //getting the Latitude from the location json
+      const currentLatitude = JSON.stringify(position.coords.latitude);
+      //Setting the state
+      saveLocationForFutureUse(currentLatitude, currentLongitude);
+    },
+    (error) => {
+      // See error code and message
+      console.log(error.code, error.message);
+    },
+    { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 },
+  );
+
+
+  const saveLocationForFutureUse = async (latitude, longitude) => {
+    console.log(latitude,"latitude",longitude,"longitude")
+    try {
+      await AsyncStorage.setItem(AsyncStorageContaints.surveyLatitude, latitude);
+      await AsyncStorage.setItem(AsyncStorageContaints.surveyLongitude, longitude);
+      console.log('Latitude and longitude saved successfully!',latitude,longitude);
+    } catch (error) {
+      console.log('Error saving latitude and longitude:', error);
+    }
+  };
+
   return (
-    <SafeAreaView style={{flex:1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}

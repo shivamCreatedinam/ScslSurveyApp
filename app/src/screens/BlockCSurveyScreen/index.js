@@ -213,6 +213,7 @@ const BlockCSurveyScreen = () => {
             const surveyLatitude = await AsyncStorage.getItem(AsyncStorageContaints.surveyLatitude);
             const surveyLongitude = await AsyncStorage.getItem(AsyncStorageContaints.surveyLongitude);
             //UserId
+            console.log("surveyLatitude",surveyLatitude,"surveyLongitude",surveyLongitude )
             setLattitude(surveyLatitude);
             setLongitude(surveyLongitude);
             //UserId
@@ -1163,52 +1164,53 @@ const BlockCSurveyScreen = () => {
                                 />
                             </View>
                             {bank?.label === 'Yes' &&
-                                <>
-                                    <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                        <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>20(d). When the bank was approached, have the branch officials refused it?</Text>
-                                        <RadioButtonRN
-                                            data={dataGroup}
-                                            selectedBtn={(e) => setRefuse(e)}
-                                        />
-                                    </View>
-                                    {refuse?.label === 'Yes' &&
-                                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', paddingTop: 10 }}>
-                                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>20(e). If refused, what was the reason cited?</Text>
-                                            <MultiSelect
-                                                hideTags
-                                                items={refuseReason}
-                                                uniqueKey="id"
-                                                ref={multiSelectRef}
-                                                onSelectedItemsChange={(items) =>
-                                                    onSelecteRefusedReason(items)
-                                                }
-                                                selectedItems={selectedRefuseReason}
-                                                selectText="Select Reason"
-                                                onChangeInput={(text) => console.log(text)}
-                                                altFontFamily="ProximaNova-Light"
-                                                tagRemoveIconColor="#000"
-                                                tagBorderColor="#000"
-                                                tagTextColor="#000"
-                                                selectedItemTextColor="#000"
-                                                selectedItemIconColor="#000"
-                                                itemTextColor="#000"
-                                                displayKey="lable"
-                                                searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                                submitButtonColor="#000"
-                                                submitButtonText="Submit"
-                                                itemBackground="#000"
-                                                styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
-                                            />
-                                            <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                                {SelectedRefuseReasonTypeLabels.map((label, index) => (
-                                                    <View style={{ margin: 5 }}>
-                                                        <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                                    </View>
-                                                ))}
-                                            </View>
-                                        </View>}
-                                </>
+
+                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>20(d). When the bank was approached, have the branch officials refused it?</Text>
+                                    <RadioButtonRN
+                                        data={dataGroup}
+                                        selectedBtn={(e) => setRefuse(e)}
+                                    />
+                                </View>
                             }
+                            {refuse?.label === 'Yes' &&
+                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', paddingTop: 10 }}>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>20(e). If refused, what was the reason cited?</Text>
+                                    <MultiSelect
+                                        hideTags
+                                        items={refuseReason}
+                                        uniqueKey="id"
+                                        ref={multiSelectRef}
+                                        onSelectedItemsChange={(items) =>
+                                            onSelecteRefusedReason(items)
+                                        }
+                                        selectedItems={selectedRefuseReason}
+                                        selectText="Select Reason"
+                                        onChangeInput={(text) => console.log(text)}
+                                        altFontFamily="ProximaNova-Light"
+                                        tagRemoveIconColor="#000"
+                                        tagBorderColor="#000"
+                                        tagTextColor="#000"
+                                        selectedItemTextColor="#000"
+                                        selectedItemIconColor="#000"
+                                        itemTextColor="#000"
+                                        displayKey="lable"
+                                        searchInputStyle={{ color: '#000', paddingLeft: 10 }}
+                                        submitButtonColor="#000"
+                                        submitButtonText="Submit"
+                                        itemBackground="#000"
+                                        styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
+                                    />
+                                    <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                        {SelectedRefuseReasonTypeLabels.map((label, index) => (
+                                            <View style={{ margin: 5 }}>
+                                                <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
+                                            </View>
+                                        ))}
+                                    </View>
+                                </View>}
+
+
 
                         </View>
 

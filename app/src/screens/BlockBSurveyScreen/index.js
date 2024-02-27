@@ -64,6 +64,7 @@ const BlockBSurveyScreen = () => {
     const [selectedIncomes, setSelectedIncomes] = React.useState([]);
     const [selectCashReceipt, setSelectCashReceipt] = React.useState([]);
     const [SelectedSaveMoney, setSelectSaveMoney] = React.useState([]);
+    const [TransactMethod, setTransactMethod] = React.useState([]);
     const [differentlyAble, setDifferently] = React.useState('');
     const [smartPhone, setSmartphone] = React.useState('');
     const [anyGroup, setAnyGroup] = React.useState('');
@@ -636,7 +637,7 @@ const BlockBSurveyScreen = () => {
                 type: "danger",
             });
         }
-        else if (bank?.label === 'Yes' && transaction === null) {
+        else if (bank?.label === 'Yes' && TransactMethod?.length === 0) {
             showMessage({
                 message: "Please Select Transact Mode",
                 description: "Please Select Transact Mode!",
@@ -880,7 +881,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': transaction === null ? "" : `${transaction}`
+                    'response': TransactMethod?.length  === 0 ? [] : `${TransactMethod}`
                 },
                 {
                     "section_no": "B",
@@ -1050,6 +1051,25 @@ const BlockBSurveyScreen = () => {
         }
         setSelectedOccupations(selectedItems);
     }
+
+    const onSelectTransactmode = (selectedItems) => {
+        if (selectedItems.length === 0) {
+            Alert.alert('Selection Required', 'Please select two valid reason.');
+            return
+        }
+        else if (selectedItems.length > 2) {
+            Alert.alert('Limit Exceeded', 'You cannot select more than 2 reasons.', [
+                { text: 'OK', onPress: () => multiSelectRef.current._removeItem(selectedItems[selectedItems.length - 1]) },
+            ]);
+            return
+        }
+        setTransactMethod(selectedItems);
+    }
+
+    const selectedTransactLabels = TransactMethod.map((selectedId) => {
+        const selectedReason = mostTransact.find((reason) => reason.id === selectedId);
+        return selectedReason ? selectedReason.lable : '';
+    });
 
     const onSelectedCashReceipt = (selectedItems) => {
         setSelectCashReceipt(selectedItems);
@@ -1522,7 +1542,46 @@ const BlockBSurveyScreen = () => {
                                     ))}
                                 </View>
                             </View>
+
                             <View style={{ padding: 10, }} />
+                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>14. How do you mostly transact (receive and pay money) in your bank account?</Text>
+                                <MultiSelect
+                                    hideTags
+                                    items={mostTransact}
+                                    uniqueKey="id"
+                                    ref={multiSelectRef}
+                                    onSelectedItemsChange={(items) =>
+                                        onSelectTransactmode(items)
+                                    }
+                                    selectedItems={TransactMethod}
+                                    selectText="Select Reasons"
+                                    onChangeInput={(text) => console.log(text)}
+                                    altFontFamily="ProximaNova-Light"
+                                    tagRemoveIconColor="#000"
+                                    tagBorderColor="#000"
+                                    tagTextColor="#000"
+                                    selectedItemTextColor="#000"
+                                    selectedItemIconColor="#000"
+                                    itemTextColor="#000"
+                                    displayKey="lable"
+                                    searchInputStyle={{ color: '#000', paddingLeft: 10 }}
+                                    submitButtonColor="#000"
+                                    submitButtonText="Submit"
+                                    itemBackground="#000"
+                                    styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
+                                />
+                                <View>
+                                    {selectedTransactLabels.map((label, index) => (
+                                        <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                            <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
+                                        </View>
+                                    ))}
+                                </View>
+                            </View>
+
+
+                            {/* <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>14. How do you mostly transact (receive and pay money) in your bank account?</Text>
                                 <Dropdown
@@ -1548,7 +1607,8 @@ const BlockBSurveyScreen = () => {
                                         setIsTransactionFocus(false);
                                     }}
                                 />
-                            </View>
+                            </View> */}
+
                             <View style={{ padding: 10, }} />
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>15. If you receive a subsidy/govt benefit in your account, how many times do you get it in a year?</Text>

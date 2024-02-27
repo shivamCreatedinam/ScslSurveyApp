@@ -307,7 +307,6 @@ const BlockDSurveyScreen = () => {
     }
 
     const validate = () => {
-        console.log('validate', enrollA?.label, enrollB?.label, enrollC?.label, enrollD?.label, enrolledOtherInsurance?.label);
         if (life === null) {
             showMessage({
                 message: "Please Select Insurance Facility!",
@@ -1306,7 +1305,6 @@ const BlockDSurveyScreen = () => {
                                 />
                             </View>
                         </View>
-                        <Text>{enrollA?.label}{enrollB?.label}{enrollA?.label}{enrollC?.label}{enrollD?.label}{enrolledOtherInsurance?.label}</Text>
                         {(enrollA?.label === "Yes" && enrollB?.label === "Yes" && enrollC?.label === "Yes" && enrollD?.label === "Yes") && enrolledOtherInsurance?.label === 'Yes' &&
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff', paddingTop: 10 }}>
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>29 . If your insurance has become inactive, please indicate the reasons?</Text>

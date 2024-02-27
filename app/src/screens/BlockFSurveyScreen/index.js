@@ -58,7 +58,7 @@ const BlockFSurveyScreen = () => {
     const [financialliteracyReason, setfinancialliteracyReason] = React.useState([]);
     const [differentlyAble, setDifferently] = React.useState('');
     const [smartPhone, setSmartphone] = React.useState('');
-    const [anyGroup, setAnyGroup] = React.useState('');
+    const [transactHelp, sTransactHelp] = React.useState(null);
     const [serviceContinue, setServiceContinue] = React.useState(null);
     const [moneyRecover, setMoneyRecover] = React.useState(null);
     const [preacution, setPreacution] = React.useState(null);
@@ -1582,7 +1582,7 @@ const BlockFSurveyScreen = () => {
                                     onSelectedItemsChange={(items) =>
                                         onSelectedReasonInfoRelating(items)
                                     }
-                                  
+
                                     selectedItems={InformationRelatingValue}
                                     selectText="Select Reason"
                                     onChangeInput={(text) => console.log(text)}
@@ -1683,77 +1683,114 @@ const BlockFSurveyScreen = () => {
                         <View style={{ padding: 10, }} />
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
                             <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37. Digital Transaction</Text>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (a). Do you feel confident and comfortable doing digital transactions on your own?</Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (a). Do you carry out digital transaction either by your own or through someone’s help?</Text>
                             <RadioButtonRN
                                 data={data}
-                                selectedBtn={(e) => sComfortTransaction(e)}
+                                selectedBtn={(e) => sTransactHelp(e)}
                             />
                         </View>
-                        <View style={{ padding: 10, }} />
-                        <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (b).If no, do you carry out digital transactions with someone’s help?</Text>
-                            <RadioButtonRN
-                                data={data}
-                                selectedBtn={(e) => stransactionHelp(e)}
-                            />
-                            <View style={{ padding: 10, }} />
+
+                        {transactHelp?.label === 'Yes' &&
+                            <>
+                                <View style={{ padding: 10, }} />
+                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (b). Do you feel confident and comfortable doing digital transactions on your own?</Text>
+                                    <RadioButtonRN
+                                        data={data}
+                                        selectedBtn={(e) => { console.log("eee", e) }}
+                                    />
+                                </View>
+                            </>}
+
+                        {transactHelp?.label === "No" && <>
                             <View>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (c).Do you face any hinderance in carrying out transactions digitally?</Text>
+                                <View style={{ padding: 10, }} />
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (f). Have you or anyone in your family lost money in digital payment fraud?</Text>
                                 <RadioButtonRN
                                     data={data}
-                                    selectedBtn={(e) => setIsHinderance(e)}
+                                    selectedBtn={(e) => sPayFraud(e)}
                                 />
                             </View>
-                            {isHinderance?.label === 'Yes' ?
+                        </>}
+
+
+                        {comfortTransaction?.label === "No" && <View>
+                            <View style={{ padding: 10, }} />
+                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (c).If no, do you carry out digital transactions with someone’s help?</Text>
+                                <RadioButtonRN
+                                    data={data}
+                                    selectedBtn={(e) => stransactionHelp(e)}
+                                />
+                            </View> </View>
+                        }
+
+
+                        {comfortTransaction?.label === "Yes" &&
+
+                            <>
+                                <View style={{ padding: 10, }} />
                                 <View>
-                                    <View style={{ padding: 10, }} />
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (d). If yes, please indicate top two reasons?</Text>
-                                    <MultiSelect
-                                        hideTags
-                                        items={transactionsdigitally}
-                                        uniqueKey="id"
-                                        ref={multiSelectRef}
-                                        onSelectedItemsChange={(items) =>
-                                            onSelectedReasonChange(items)
-                                        }
-                                        selectedItems={selectedReason}
-                                        selectText="Select financial transactions"
-                                        onChangeInput={(text) => console.log(text)}
-                                        altFontFamily="ProximaNova-Light"
-                                        tagRemoveIconColor="#000"
-                                        tagBorderColor="#000"
-                                        tagTextColor="#000"
-                                        selectedItemTextColor="#000"
-                                        selectedItemIconColor="#000"
-                                        itemTextColor="#000"
-                                        displayKey="lable"
-                                        searchInputStyle={{ color: '#000', paddingLeft: 10 }}
-                                        submitButtonColor="#000"
-                                        submitButtonText="Submit"
-                                        itemBackground="#000"
-                                        styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (d).Do you face any hinderance in carrying out transactions digitally?</Text>
+                                    <RadioButtonRN
+                                        data={data}
+                                        selectedBtn={(e) => setIsHinderance(e)}
                                     />
-                                    <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                        {SelectedReasonlabels.map((label, index) => (
-                                            <View style={{ margin: 5 }}>
-                                                <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                            </View>
-                                        ))}
-                                    </View>
-                                </View> :
+                                </View>
+                            </>
+                        }
+                        {isHinderance?.label === 'Yes' ?
+                            <View>
+                                <View style={{ padding: 10, }} />
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (e). If yes, please indicate top two reasons?</Text>
+                                <MultiSelect
+                                    hideTags
+                                    items={transactionsdigitally}
+                                    uniqueKey="id"
+                                    ref={multiSelectRef}
+                                    onSelectedItemsChange={(items) =>
+                                        onSelectedReasonChange(items)
+                                    }
+                                    selectedItems={selectedReason}
+                                    selectText="Select financial transactions"
+                                    onChangeInput={(text) => console.log(text)}
+                                    altFontFamily="ProximaNova-Light"
+                                    tagRemoveIconColor="#000"
+                                    tagBorderColor="#000"
+                                    tagTextColor="#000"
+                                    selectedItemTextColor="#000"
+                                    selectedItemIconColor="#000"
+                                    itemTextColor="#000"
+                                    displayKey="lable"
+                                    searchInputStyle={{ color: '#000', paddingLeft: 10 }}
+                                    submitButtonColor="#000"
+                                    submitButtonText="Submit"
+                                    itemBackground="#000"
+                                    styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
+                                />
+                                <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
+                                    {SelectedReasonlabels.map((label, index) => (
+                                        <View style={{ margin: 5 }}>
+                                            <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
+                                        </View>
+                                    ))}
+                                </View>
+                            </View> :
+                            <>
                                 <View>
                                     <View style={{ padding: 10, }} />
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (e). Have you or anyone in your family lost money in digital payment fraud?</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (f). Have you or anyone in your family lost money in digital payment fraud?</Text>
                                     <RadioButtonRN
                                         data={data}
                                         selectedBtn={(e) => sPayFraud(e)}
                                     />
-                                </View>}
-                        </View>
+                                </View>
+                            </>}
+
                         {payFraud?.label === "Yes" && <View>
                             {/* <View style={{ padding: 10, }} /> */}
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (f). After the incident, do you continue to use digital banking services?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (g). After the incident, do you continue to use digital banking services?</Text>
                                 <RadioButtonRN
                                     data={smartphone}
                                     selectedBtn={(e) => setServiceContinue(e)}
@@ -1761,7 +1798,7 @@ const BlockFSurveyScreen = () => {
                             </View>
                             {/* <View style={{ padding: 10, }} /> */}
                             <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>37 (g). Were you or your family member could recover the money lost in digital payment fraud?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold', flex: 1 }}>37 (h). Were you or your family member could recover the money lost in digital payment fraud?</Text>
                                 <RadioButtonRN
                                     data={smartphone}
                                     selectedBtn={(e) => setMoneyRecover(e)}
@@ -1773,7 +1810,7 @@ const BlockFSurveyScreen = () => {
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
 
                             <View style={{ padding: 10, }} />
-                            <Text style={{ fontWeight: 'bold' }}>37 (h). Do you know about various precautions while using digital banking?</Text>
+                            <Text style={{ fontWeight: 'bold' }}>37 (i). Do you know about various precautions while using digital banking?</Text>
                             <RadioButtonRN
                                 data={smartphone}
                                 selectedBtn={(e) => setPreacution(e)}
