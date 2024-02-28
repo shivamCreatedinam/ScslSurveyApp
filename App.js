@@ -3,26 +3,19 @@ import FlashMessage from 'react-native-flash-message';
 import Geolocation from '@react-native-community/geolocation';
 import AppNavigation from './app/navigation/AppNavigation';
 import {
-  Text,
-  View,
-  Platform,
   StatusBar,
-  ScrollView,
   StyleSheet,
   Dimensions,
   SafeAreaView,
-  NativeModules,
   useColorScheme,
-  TouchableOpacity,
-  NativeEventEmitter,
-  PermissionsAndroid,
-  FlatList,
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AsyncStorageContaints from './app/utility/AsyncStorageConstants';
 
 const App = () => {
+
+  console.disableYellowBox = true;
 
   const myLocalFlashMessage = useRef();
   const [isScanning, setIsScanning] = useState(false);
@@ -52,11 +45,11 @@ const App = () => {
 
 
   const saveLocationForFutureUse = async (latitude, longitude) => {
-    console.log(latitude,"latitude",longitude,"longitude")
+    console.log(latitude, "latitude", longitude, "longitude")
     try {
       await AsyncStorage.setItem(AsyncStorageContaints.surveyLatitude, latitude);
       await AsyncStorage.setItem(AsyncStorageContaints.surveyLongitude, longitude);
-      console.log('Latitude and longitude saved successfully!',latitude,longitude);
+      console.log('Latitude and longitude saved successfully!', latitude, longitude);
     } catch (error) {
       console.log('Error saving latitude and longitude:', error);
     }

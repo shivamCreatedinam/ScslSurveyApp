@@ -188,7 +188,7 @@ export default class PermissionScreenMain extends Component {
                 <Text style={{ color: '#000', marginTop: 50, fontSize: 25, fontWeight: 'bold', marginBottom: 10 }}>App Permission</Text>
                 <View style={{ flex: 1 }}>
                     <View style={{ marginBottom: 20 }}>
-                        <Image style={{ height: 250, width: 250, resizeMode: 'contain', alignSelf: 'center' }} source={require('../../../assets/circle_green.png')} />
+                        <Image style={{ height: 250, width: 250, resizeMode: 'contain', alignSelf: 'center', marginLeft: 40 }} source={require('../../../assets/app_logo.png')} />
                     </View>
                     <TouchableOpacity onPress={() => this.requestLocationPermission()} style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 15 }}>
                         <Text style={{ fontSize: 14, color: '#000', flex: 1 }}>Location Permission</Text>

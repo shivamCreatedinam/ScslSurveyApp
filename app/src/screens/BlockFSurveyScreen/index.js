@@ -668,21 +668,21 @@ const BlockFSurveyScreen = () => {
                 type: "danger",
             });
         }
-        else if (isHinderance === null) {
+        else if (comfortTransaction?.label === 'Yes' && isHinderance === null) {
             showMessage({
                 message: "Please Select Hinderance",
                 description: "Please Select Hinderance!",
                 type: "danger",
             });
         }
-        else if (isHinderance.label === 'Yes' && selectedReason?.length === 0) {
+        else if (isHinderance?.label === 'Yes' && selectedReason?.length === 0) {
             showMessage({
                 message: "Please Select Hinderance Reasons",
                 description: "Please Select Hinderance Reasons!",
                 type: "danger",
             });
         }
-        else if (isHinderance.label === 'No' && payFraud === null) {
+        else if (isHinderance?.label === 'No' && payFraud === null) {
             showMessage({
                 message: "Please Select Payment Fraud",
                 description: "Please Select Payment Fraud!",
@@ -952,7 +952,7 @@ const BlockFSurveyScreen = () => {
                     'response2': ``,
                     'response3': ``,
                     'response4': ``,
-                    'response': selectedfinancial.length === 0 ? "" : selectedfinancial
+                    'response': selectedfinancial.length === 0 ? [] : selectedfinancial
                 },
                 {
                     'section_no': "F",
@@ -1069,7 +1069,7 @@ const BlockFSurveyScreen = () => {
                     'response2': ``,
                     'response3': ``,
                     'response4': ``,
-                    'response': digitalChannelChange.length === 0 ? "" : digitalChannelChange
+                    'response': digitalChannelChange.length === 0 ? [] : digitalChannelChange
                 },
                 {
                     'section_no': "F",
@@ -1082,7 +1082,7 @@ const BlockFSurveyScreen = () => {
                     'response2': ``,
                     'response3': ``,
                     'response4': ``,
-                    'response': DigitalpreferredChange.length === 0 ? "" : DigitalpreferredChange
+                    'response': DigitalpreferredChange.length === 0 ? [] : DigitalpreferredChange
                 },
                 {
                     'section_no': "F",
@@ -1147,7 +1147,7 @@ const BlockFSurveyScreen = () => {
                     'response2': ``,
                     'response3': ``,
                     'response4': ``,
-                    'response': selectedSatisfiedReasons.length === 0 ? "" : selectedSatisfiedReasons
+                    'response': selectedSatisfiedReasons.length === 0 ? [] : selectedSatisfiedReasons
                 },
                 {
                     'section_no': "F",
@@ -1368,7 +1368,7 @@ const BlockFSurveyScreen = () => {
         AsyncStorage.setItem(AsyncStorageContaints.surveyNextBlock, '');
         navigation.replace('DashboardScreen');
         setSubmitSurvey(true);
-        saveSurveyCount();
+        // saveSurveyCount();
     }
 
     const saveSurveyCount = async () => {
@@ -1694,35 +1694,36 @@ const BlockFSurveyScreen = () => {
                             <>
                                 <View style={{ padding: 10, }} />
                                 <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (b). Do you feel confident and comfortable doing digital transactions on your own?</Text>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (b). {comfortTransaction?.label} Do you feel confident and comfortable doing digital transactions on your own?</Text>
                                     <RadioButtonRN
                                         data={data}
-                                        selectedBtn={(e) => { console.log("eee", e) }}
+                                        selectedBtn={(e) => { console.log("eee", e), sComfortTransaction(e) }}
                                     />
                                 </View>
                             </>}
 
                         {transactHelp?.label === "No" && <>
-                            <View>
+                            {/* <View>
                                 <View style={{ padding: 10, }} />
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (f). Have you or anyone in your family lost money in digital payment fraud?</Text>
                                 <RadioButtonRN
                                     data={data}
                                     selectedBtn={(e) => sPayFraud(e)}
                                 />
-                            </View>
+                            </View> */}
                         </>}
 
-
-                        {comfortTransaction?.label === "No" && <View>
-                            <View style={{ padding: 10, }} />
-                            <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (c).If no, do you carry out digital transactions with someone’s help?</Text>
-                                <RadioButtonRN
-                                    data={data}
-                                    selectedBtn={(e) => stransactionHelp(e)}
-                                />
-                            </View> </View>
+                        {comfortTransaction?.label === "No" &&
+                            <View>
+                                <View style={{ padding: 10, }} />
+                                <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (c).If no, do you carry out digital transactions with someone’s help?</Text>
+                                    <RadioButtonRN
+                                        data={data}
+                                        selectedBtn={(e) => stransactionHelp(e)}
+                                    />
+                                </View>
+                            </View>
                         }
 
 
