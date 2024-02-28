@@ -400,8 +400,8 @@ const AddSurveyScreen = () => {
         data.append('survey_token', name);
         data.append('gender', gender?.label);
         data.append('age_of_repons', Number(age));
-        data.append('city', value);
-        data.append('state', valueDistrict);
+        data.append('state', value);
+        data.append('city', valueDistrict);
         data.append('occupation_id', selectedOccupations);
         data.append('education_id', selectedEducation);
         data.append('income_id', selectedIncomes);
