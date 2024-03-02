@@ -212,6 +212,7 @@ const BlockBSurveyScreen = () => {
     // console.log("accountValues", accountValues)
 
     const commentInputOnChange = (id, value) => {
+        console.log('commentInputOnChange_' + id, value);
         value = String(value); // Ensure value is treated as a string
         // Check if the value starts with '0'
         if (value.startsWith('0')) {
@@ -229,11 +230,13 @@ const BlockBSurveyScreen = () => {
 
             setAccountValues(prevValues => {
                 const updatedValues = [...prevValues];
-                const existingIndex = updatedValues.findIndex(item => item.id === id);
+                const existingIndex = updatedValues.findIndex(item => item.value === value);
                 if (existingIndex !== -1) {
                     updatedValues[existingIndex].value = value;
+                    console.log(updatedValues[existingIndex].value = value);
                 } else {
-                    updatedValues.push({ id, value });
+                    updatedValues.push(value);
+                    // console.log('commentInputOnChange', updatedValues.push(value))
                 }
                 return updatedValues;
             });
@@ -272,10 +275,11 @@ const BlockBSurveyScreen = () => {
     });
 
     const AccountType = [
-        { id: 1, lable: 'Savings Account' },
-        { id: 2, lable: 'PMJDY Account' },
-        { id: 3, lable: 'Current Account' },
-        { id: 4, lable: 'FD/RD Account Credit (Loan) Account' }
+        { id: 0, lable: 'Savings Account' },
+        { id: 1, lable: 'PMJDY Account' },
+        { id: 2, lable: 'Current Account' },
+        { id: 3, lable: 'FD/RD Account' },
+        { id: 4, lable: 'Credit (Loan) Account' }
     ];
 
     const frequentlyBank = [
@@ -840,8 +844,8 @@ const BlockBSurveyScreen = () => {
                     'sub_q_no': "",
                     'sub_q_title': "",
                     'sub_q_type': "",
-                    'account_no': "1", // accountValues.length === 0 ? [] : accountValues,
-                    'response': "1", // AccountTypeValue === null ? "" : AccountTypeValue[0],
+                    'account_no': accountValues.length === 0 ? [] : accountValues,
+                    'response': AccountTypeValue.length === 0 ? [] : AccountTypeValue,
                 },
                 {
                     "section_no": "B",
@@ -881,7 +885,7 @@ const BlockBSurveyScreen = () => {
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': TransactMethod?.length  === 0 ? [] : `${TransactMethod}`
+                    'response': TransactMethod?.length === 0 ? [] : `${TransactMethod}`
                 },
                 {
                     "section_no": "B",
