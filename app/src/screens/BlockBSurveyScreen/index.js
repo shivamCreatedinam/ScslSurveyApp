@@ -212,7 +212,7 @@ const BlockBSurveyScreen = () => {
     // console.log("accountValues", accountValues)
 
     const commentInputOnChange = (id, value) => {
-        console.log('commentInputOnChange_' + id, value);
+        console.log('commentInputOnChange_1' + id, value);
         value = String(value); // Ensure value is treated as a string
         // Check if the value starts with '0'
         if (value.startsWith('0')) {
@@ -1147,7 +1147,7 @@ const BlockBSurveyScreen = () => {
                 <ScrollView>
                     <View style={{ padding: 10 }}>
                         <View style={{ padding: 5, elevation: 1, backgroundColor: '#fff' }}>
-                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>{bank?.label} 1. Do you have a bank account? </Text>
+                            <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>1. Do you have a bank account? </Text>
                             <RadioButtonRN
                                 data={data}
                                 selectedBtn={(e) => setBank(e)}

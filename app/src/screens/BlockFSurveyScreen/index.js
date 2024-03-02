@@ -656,12 +656,12 @@ const BlockFSurveyScreen = () => {
         }
         else if (comfortTransaction === null) {
             showMessage({
-                message: "Please Select Digital Transaction",
+                message: "Please Select Digital Transactionxxx",
                 description: "Please Select Digital Transaction!",
                 type: "danger",
             });
         }
-        else if (transactionHelp === null) {
+        else if (comfortTransaction?.label === "No" && transactionHelp === null) {
             showMessage({
                 message: "Please Select Digital Transaction",
                 description: "Please Select Digital Transaction!",
@@ -1703,14 +1703,14 @@ const BlockFSurveyScreen = () => {
                             </>}
 
                         {transactHelp?.label === "No" && <>
-                            {/* <View>
+                            <View>
                                 <View style={{ padding: 10, }} />
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>37 (f). Have you or anyone in your family lost money in digital payment fraud?</Text>
                                 <RadioButtonRN
                                     data={data}
                                     selectedBtn={(e) => sPayFraud(e)}
                                 />
-                            </View> */}
+                            </View>
                         </>}
 
                         {comfortTransaction?.label === "No" &&
