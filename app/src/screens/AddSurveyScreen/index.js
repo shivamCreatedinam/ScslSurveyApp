@@ -410,6 +410,7 @@ const AddSurveyScreen = () => {
         data.append('adults', adult);
         data.append('children', children);
         data.append('total', Number(adult) + Number(children));
+        data.append('earning_members', member);
         data.append('part_of_group', anyGroup?.label);
         data.append('own_smartphone', smartPhone?.label);
         data.append('latitude', Lattitude);
@@ -715,7 +716,7 @@ const AddSurveyScreen = () => {
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold', marginRight: 10 }}>Total : {Number(adult) + Number(children)}</Text>
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <View style={{ flex: 1 }}>
+                                <View style={{ flex: 1, }}>
                                     <Text style={{ fontWeight: 'bold' }}>Adults</Text>
                                     <SelectDropdown
                                         data={adults}
@@ -735,7 +736,7 @@ const AddSurveyScreen = () => {
                                         }}
                                     />
                                 </View>
-                                <View style={{ flex: 1, marginLeft: 5 }}>
+                                <View style={{ flex: 1, marginLeft: 5, }}>
                                     <Text style={{ fontWeight: 'bold' }}>Children's</Text>
                                     <SelectDropdown
                                         data={childern}

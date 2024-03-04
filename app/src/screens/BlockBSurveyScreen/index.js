@@ -314,7 +314,6 @@ const BlockBSurveyScreen = () => {
         { id: 2, lable: '4 to 8 times' },
         { id: 3, lable: '9 to 12 times' },
         { id: 4, lable: 'More than 12 times' },
-        { id: 5, lable: 'No' },
         { id: 6, lable: 'I don’t receive it' },
     ];
 

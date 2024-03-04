@@ -180,7 +180,8 @@ export default class DraftSurveyScreen extends Component {
             console.log("inside E")
         } else if (this.state.DraftSection === 'A') {
             console.log("inside F")
-            this.props.navigation.replace('BlockBSurveyScreen');
+            // this.props.navigation.replace('BlockBSurveyScreen');
+            this.props.navigation.replace('BlockFSurveyScreen');
         }
     }
 

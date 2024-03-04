@@ -832,7 +832,7 @@ const BlockFSurveyScreen = () => {
                 type: "danger",
             });
         }
-        else if (grievanceRelated?.label === 'No' && reasonprovidedBC === null) {
+        else if (isgrievanceAddressed?.label === 'No' && isgrievanceAddressed !== null) {
             showMessage({
                 message: "Please Select Reason By BC Agent",
                 description: "Please Select Reason By BC Agent!",
@@ -1582,7 +1582,6 @@ const BlockFSurveyScreen = () => {
                                     onSelectedItemsChange={(items) =>
                                         onSelectedReasonInfoRelating(items)
                                     }
-
                                     selectedItems={InformationRelatingValue}
                                     selectText="Select Reason"
                                     onChangeInput={(text) => console.log(text)}
@@ -2030,16 +2029,20 @@ const BlockFSurveyScreen = () => {
                                 data={differently}
                                 selectedBtn={(e) => setGrievanceRelated(e)}
                             />
-                            {grievanceRelated?.label === 'Yes' ? <>
+                            {grievanceRelated?.label === 'No' ?
+                                <>
+                                    <View style={{ padding: 10, }} />
+                                    <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>40 (h). If response to Q40(g) is Yes, whether your grievance was addressed timely (within one month)?</Text>
+                                    <RadioButtonRN
+                                        data={smartphone}
+                                        selectedBtn={(e) => sIsGrievanceAddressed(e)}
+                                    />
+                                </> :
+                                null}
+                            <View style={{ padding: 10, }} />
+                            {isgrievanceAddressed !== null && isgrievanceAddressed?.label === 'No' ? <>
                                 <View style={{ padding: 10, }} />
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>40 (h). If response to Q40(g) is Yes, whether your grievance was addressed timely (within one month)?</Text>
-                                <RadioButtonRN
-                                    data={smartphone}
-                                    selectedBtn={(e) => sIsGrievanceAddressed(e)}
-                                />
-                            </> : <>
-                                <View style={{ padding: 10, }} />
-                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>40 (i). If response to Q40(g) is No, what were reasons provided by BC Agent?</Text>
+                                <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>40 (i). If response to Q40(h) is No, what were reasons provided by BC Agent?</Text>
                                 <Dropdown
                                     style={[styles.dropdown, reasonprovidedBCFocus && { borderColor: 'blue' }]}
                                     placeholderStyle={styles.placeholderStyle}
@@ -2061,8 +2064,7 @@ const BlockFSurveyScreen = () => {
                                         setReasonprovidedBC(item?.id);
                                         setReasonprovidedBCFocus(false);
                                     }}
-                                /></>}
-                            <View style={{ padding: 10, }} />
+                                /></> : null}
                         </View>
                         <View style={{ padding: 10, }} />
                         <TouchableOpacity disabled={isSubmitSurvey} onPress={() => Validate()} style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#000', borderRadius: 10 }}>
