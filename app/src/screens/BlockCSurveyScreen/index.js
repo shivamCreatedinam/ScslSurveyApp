@@ -233,7 +233,7 @@ const BlockCSurveyScreen = () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${UserToken}`
         }
-        Axios.get(`https://createdinam.in/RBI-CBCD/public/api/get-demographic-details`, {
+        Axios.get(`https://scslsurvey.online/SCSL-SURVEY/public/api/get-demographic-details`, {
             headers: headers
         })
             .then((response) => {
@@ -256,7 +256,7 @@ const BlockCSurveyScreen = () => {
     }
 
     const getState = (token) => {
-        let url = `https://createdinam.in/RBI-CBCD/public/api/get-states`;
+        let url = `https://scslsurvey.online/SCSL-SURVEY/public/api/get-states`;
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -283,7 +283,7 @@ const BlockCSurveyScreen = () => {
     const loadDistrict = async (state) => {
         console.log('loadDistrict______', JSON.stringify(state))
         const UserToken = await AsyncStorage.getItem(AsyncStorageContaints.UserId);
-        let url = `https://createdinam.in/RBI-CBCD/public/api/get-city/${Number(state)}`;
+        let url = `https://scslsurvey.online/SCSL-SURVEY/public/api/get-city/${Number(state)}`;
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${UserToken}`
@@ -377,7 +377,7 @@ const BlockCSurveyScreen = () => {
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
-        let API_UPLOAD_MSG_FILE = `https://createdinam.in/RBI-CBCD/public/api/survey-audio-files`;
+        let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/SCSL-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);
@@ -813,7 +813,7 @@ const BlockCSurveyScreen = () => {
 
         console.log('--------->>', requestOptions?.body);
 
-        fetch("https://createdinam.in/RBI-CBCD/public/api/create-survey-section-c", requestOptions)
+        fetch("https://scslsurvey.online/SCSL-SURVEY/public/api/create-survey-section-c", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result?.status === true) {

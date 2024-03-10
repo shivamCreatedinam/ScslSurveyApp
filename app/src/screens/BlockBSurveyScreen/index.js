@@ -879,12 +879,12 @@ const BlockBSurveyScreen = () => {
                 {
                     "section_no": "B",
                     "q_no": "14",
-                    "q_type": "SELF",
+                    "q_type": "MULTI",
                     "sub_q_no": "",
                     "sub_q_title": "",
                     "sub_q_type": "",
                     "account_no": "",
-                    'response': TransactMethod?.length === 0 ? [] : `${TransactMethod}`
+                    'response': TransactMethod?.length === 0 ? [] : TransactMethod
                 },
                 {
                     "section_no": "B",
@@ -938,7 +938,7 @@ const BlockBSurveyScreen = () => {
             redirect: 'follow'
         };
 
-        fetch("https://createdinam.in/RBI-CBCD/public/api/create-survey-section-b", requestOptions)
+        fetch("https://scslsurvey.online/SCSL-SURVEY/public/api/create-survey-section-b", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log('submitSurveyXml______', JSON.stringify(result));
@@ -966,7 +966,7 @@ const BlockBSurveyScreen = () => {
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
-        let API_UPLOAD_MSG_FILE = `https://createdinam.in/RBI-CBCD/public/api/survey-audio-files`;
+        let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/SCSL-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);
@@ -1256,7 +1256,7 @@ const BlockBSurveyScreen = () => {
                                         styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
                                     />
                                     <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                        {SelectedbankAccountsLabels.map((label, index) => (
+                                        {SelectedbankAccountsLabels?.map((label, index) => (
                                             <View style={{ margin: 5 }}>
                                                 <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
                                             </View>
@@ -1425,7 +1425,7 @@ const BlockBSurveyScreen = () => {
 
                                     </View> */}
                                     <View>
-                                        {selectedAccountLabels.map((label, index) => (
+                                        {selectedAccountLabels?.map((label, index) => (
                                             <View key={index} style={{ padding: 8, }}>
                                                 <Text style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
                                                 <TextInput
@@ -1474,7 +1474,7 @@ const BlockBSurveyScreen = () => {
                                         styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
                                     />
                                     <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                        {SelectedwhatPurposesLabels.map((label, index) => (
+                                        {SelectedwhatPurposesLabels?.map((label, index) => (
                                             <View style={{ margin: 5 }}>
                                                 <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
                                             </View>

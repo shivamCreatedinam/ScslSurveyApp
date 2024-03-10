@@ -259,7 +259,7 @@ const BlockESurveyScreen = () => {
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
-        let API_UPLOAD_MSG_FILE = `https://createdinam.in/RBI-CBCD/public/api/survey-audio-files`;
+        let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/SCSL-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);
@@ -425,7 +425,7 @@ const BlockESurveyScreen = () => {
             redirect: 'follow'
         };
 
-        fetch("https://createdinam.in/RBI-CBCD/public/api/create-survey-section-e", requestOptions)
+        fetch("https://scslsurvey.online/SCSL-SURVEY/public/api/create-survey-section-e", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result?.status === true) {

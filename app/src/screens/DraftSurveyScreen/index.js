@@ -51,7 +51,7 @@ export default class DraftSurveyScreen extends Component {
 
     async getDraftSurvey() {
         // api/generate-survey-token
-        let SERVER = 'https://createdinam.in/RBI-CBCD/public/api/get-survey-token'
+        let SERVER = 'https://scslsurvey.online/SCSL-SURVEY/public/api/get-survey-token'
         this.setState({ DraftLoading: true });
         const headers = {
             'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export default class DraftSurveyScreen extends Component {
 
     async finishSurvey() {
         const userId = await AsyncStorage.getItem(AsyncStorageContaints.tempServerTokenId);
-        let SERVER = 'https://createdinam.in/RBI-CBCD/public/api/finish-survey';
+        let SERVER = 'https://scslsurvey.online/SCSL-SURVEY/public/api/finish-survey';
         var myHeaders = new Headers();
         myHeaders.append("Authorization", `Bearer ${this.state.userToken}`);
         var formdata = new FormData();
@@ -179,9 +179,9 @@ export default class DraftSurveyScreen extends Component {
             this.props.navigation.replace('BlockFSurveyScreen');
             console.log("inside E")
         } else if (this.state.DraftSection === 'A') {
-            console.log("inside F")
-            // this.props.navigation.replace('BlockBSurveyScreen');
-            this.props.navigation.replace('BlockFSurveyScreen');
+            console.log("inside A")
+            this.props.navigation.replace('BlockBSurveyScreen');
+            // this.props.navigation.replace('BlockFSurveyScreen');
         }
     }
 

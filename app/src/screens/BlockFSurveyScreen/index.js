@@ -560,7 +560,7 @@ const BlockFSurveyScreen = () => {
 
     const uploadAudioFinal = async (file) => {
         setAudioUploading(true);
-        let API_UPLOAD_MSG_FILE = `https://createdinam.in/RBI-CBCD/public/api/survey-audio-files`;
+        let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/SCSL-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
         formData.append('survey_token', name);
@@ -654,13 +654,13 @@ const BlockFSurveyScreen = () => {
                 type: "danger",
             });
         }
-        else if (comfortTransaction === null) {
-            showMessage({
-                message: "Please Select Digital Transactionxxx",
-                description: "Please Select Digital Transaction!",
-                type: "danger",
-            });
-        }
+        // else if (comfortTransaction === null) {
+        //     showMessage({
+        //         message: "Please Select Digital Transactionxxx",
+        //         description: "Please Select Digital Transaction!",
+        //         type: "danger",
+        //     });
+        // }
         else if (comfortTransaction?.label === "No" && transactionHelp === null) {
             showMessage({
                 message: "Please Select Digital Transaction",
@@ -1306,7 +1306,7 @@ const BlockFSurveyScreen = () => {
             redirect: 'follow'
         };
 
-        fetch("https://createdinam.in/RBI-CBCD/public/api/create-survey-section-f", requestOptions)
+        fetch("https://scslsurvey.online/SCSL-SURVEY/public/api/create-survey-section-f", requestOptions)
             .then(response => response.json())
             .then(result => {
                 console.log("resulyyyy", result)
@@ -1335,7 +1335,7 @@ const BlockFSurveyScreen = () => {
 
     const finishSurvey = async () => {
         const userId = await AsyncStorage.getItem(AsyncStorageContaints.tempServerTokenId);
-        let SERVER = 'https://createdinam.in/RBI-CBCD/public/api/finish-survey';
+        let SERVER = 'https://scslsurvey.online/SCSL-SURVEY/public/api/finish-survey';
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + userSendToken);
         var formdata = new FormData();
