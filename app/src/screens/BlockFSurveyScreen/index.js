@@ -832,7 +832,7 @@ const BlockFSurveyScreen = () => {
                 type: "danger",
             });
         }
-        else if (isgrievanceAddressed?.label === 'No' && isgrievanceAddressed !== null) {
+        else if (isgrievanceAddressed?.label === 'No' && reasonprovidedBC === null) {
             showMessage({
                 message: "Please Select Reason By BC Agent",
                 description: "Please Select Reason By BC Agent!",
@@ -2040,7 +2040,7 @@ const BlockFSurveyScreen = () => {
                                 </> :
                                 null}
                             <View style={{ padding: 10, }} />
-                            {isgrievanceAddressed !== null && isgrievanceAddressed?.label === 'No' ? <>
+                            {isgrievanceAddressed?.label === 'No' ? <>
                                 <View style={{ padding: 10, }} />
                                 <Text style={{ marginBottom: 5, fontWeight: 'bold' }}>40 (i). If response to Q40(h) is No, what were reasons provided by BC Agent?</Text>
                                 <Dropdown
