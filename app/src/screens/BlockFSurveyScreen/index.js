@@ -581,6 +581,7 @@ const BlockFSurveyScreen = () => {
                 body: formData,
             });
             const json = await res.json();
+            console.log("jsonn>>",json)
             setAudioUploading(false);
             showMessage({
                 message: "Audio Upload",
@@ -825,7 +826,7 @@ const BlockFSurveyScreen = () => {
         }
 
 
-        else if (grievanceRelated?.label === 'Yes' && isgrievanceAddressed === null) {
+        else if (grievanceRelated?.label === 'No' && isgrievanceAddressed === null) {
             showMessage({
                 message: "Please Select Grievance Addressed ",
                 description: "Please Select Grievance Addressed!",
@@ -1366,7 +1367,7 @@ const BlockFSurveyScreen = () => {
 
     const saveSurveryAndMoveToNext = async () => {
         AsyncStorage.setItem(AsyncStorageContaints.surveyNextBlock, '');
-        navigation.replace('DashboardScreen');
+        // navigation.replace('DashboardScreen');
         setSubmitSurvey(true);
         // saveSurveyCount();
     }

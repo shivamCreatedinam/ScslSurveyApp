@@ -202,6 +202,11 @@ const BlockBSurveyScreen = () => {
     // const [selectedAccountLabels, setSelectedAccountLabels] = useState([]);
     const [accountValues, setAccountValues] = React.useState([]);
     const [errorMessages, setErrorMessages] = React.useState([]);
+    const [acc1, setAcc1] = React.useState('');
+    const [acc2, setAcc2] = React.useState('');
+    const [acc3, setAcc3] = React.useState('');
+    const [acc4, setAcc4] = React.useState('');
+    const [acc5, setAcc5] = React.useState('');
     // const commentInputOnChange = (index, value) => {
     //     const updatedValues = [...accountValues];
     //     updatedValues[index] = { id: index, value };
@@ -211,14 +216,98 @@ const BlockBSurveyScreen = () => {
     // };
     // console.log("accountValues", accountValues)
 
-    const commentInputOnChange = (id, value) => {
-        console.log('commentInputOnChange_1' + id, value);
-        value = String(value); // Ensure value is treated as a string
-        // Check if the value starts with '0'
-        if (value.startsWith('0')) {
+    // const commentInputOnChange = (id, label) => {
+    //     if (label === 'Savings Account') {
+    //         console.log('inside 221');
+    //         setAcc1(acc1);
+    //     }
+    //     else if (label === "PMJDY Account") {
+    //         console.log('inside 225');
+    //         setAcc2(acc2);
+    //     }
+
+    //     else if (label === "Current Account") {
+    //         console.log('inside 230');
+    //         setAcc3(acc3);
+    //     }
+    //     else if (label === "FD/RD Account") {
+    //         console.log('inside 234');
+    //         setAcc4(acc4);
+    //     }
+    //     else if (label === "FD/RD Account") {
+    //         console.log('inside 238');
+    //         setAcc5(acc5);
+    //     }
+    //     else if (label === "Credit (Loan) Account") {
+    //         console.log('inside 242');
+    //         setAcc5(acc5);
+    //     }
+
+    //     console.log('acc1', acc1, "acc2", acc2, "acc3", acc3, "acc4", acc4, "acc5", acc5)
+
+    //     const value1 = String(acc1);
+    //     const value2 = String(acc2);
+    //     const value3 = String(acc3);
+    //     const value4 = String(acc4); // Ensure value is treated as a string
+    //     const value5 = String(acc5);
+
+    //     // Check if the value starts with '0'
+    //     if ((value1.startsWith('0') || value2.startsWith('0') || value3.startsWith('0') || value4.startsWith('0') || value5.startsWith('0'))) {
+    //         setErrorMessages(prevMessages => {
+    //             const updatedMessages = [...prevMessages];
+    //             updatedMessages[id] = 'Value cannot start with 0';
+    //             return updatedMessages;
+    //         });
+    //     } else {
+    //         setErrorMessages(prevMessages => {
+    //             const updatedMessages = [...prevMessages];
+    //             updatedMessages[id] = '';
+    //             return updatedMessages;
+    //         });
+
+    //         // setAccountValues(prevValues => {
+    //         //     const updatedValues = [...prevValues];
+    //         //     const existingIndex = updatedValues.findIndex(item => item.value === value);
+    //         //     if (existingIndex !== -1) {
+    //         //         updatedValues[existingIndex].value = value;
+    //         //         console.log(updatedValues[existingIndex].value = value);
+    //         //     } else {
+    //         //         updatedValues.push(value);
+    //         //         // console.log('commentInputOnChange', updatedValues.push(value))
+    //         //     }
+    //         //     return updatedValues;
+    //         // });
+    //     }
+    // };
+
+    const commentInputOnChange = (id, value, label) => {
+        switch (label) {
+            case 'Savings Account':
+                setAcc1(value);
+                break;
+            case 'PMJDY Account':
+                setAcc2(value);
+                break;
+            case 'Current Account':
+                setAcc3(value);
+                break;
+            case 'FD/RD Account':
+                setAcc4(value);
+                break;
+            case 'Credit (Loan) Account':
+                setAcc5(value);
+                break;
+            default:
+                break;
+        }
+
+        const trimmedValue = value.trim(); // Trim any leading or trailing whitespaces
+        console.log("trimmedval", trimmedValue)
+        // Check if the value starts with '0' or is empty
+        if (trimmedValue.startsWith('0') || trimmedValue === '') {
             setErrorMessages(prevMessages => {
                 const updatedMessages = [...prevMessages];
-                updatedMessages[id] = 'Value cannot start with 0';
+                updatedMessages[id] = 'Value cannot start with 0 or be empty';
                 return updatedMessages;
             });
         } else {
@@ -227,21 +316,9 @@ const BlockBSurveyScreen = () => {
                 updatedMessages[id] = '';
                 return updatedMessages;
             });
-
-            setAccountValues(prevValues => {
-                const updatedValues = [...prevValues];
-                const existingIndex = updatedValues.findIndex(item => item.value === value);
-                if (existingIndex !== -1) {
-                    updatedValues[existingIndex].value = value;
-                    console.log(updatedValues[existingIndex].value = value);
-                } else {
-                    updatedValues.push(value);
-                    // console.log('commentInputOnChange', updatedValues.push(value))
-                }
-                return updatedValues;
-            });
         }
     };
+    console.log('acc1', acc1, "acc2", acc2, "acc3", acc3, "acc4", acc4, "acc5", acc5)
 
     const whatPurposesdata = [
         { id: 1, lable: 'Receive Salary/ Money' },
@@ -843,8 +920,13 @@ const BlockBSurveyScreen = () => {
                     'sub_q_no': "",
                     'sub_q_title': "",
                     'sub_q_type': "",
-                    'account_no': accountValues.length === 0 ? [] : accountValues,
-                    'response': AccountTypeValue.length === 0 ? [] : AccountTypeValue,
+                    'account_no': [],
+                    'response': [],
+                    'res1': acc1 ? acc1 : '',
+                    'res2': acc2 ? acc2 : '',
+                    'res3': acc3 ? acc3 : '',
+                    'res4': acc4 ? acc4 : '',
+                    'res5': acc5 ? acc5 : ''
                 },
                 {
                     "section_no": "B",
@@ -930,7 +1012,7 @@ const BlockBSurveyScreen = () => {
         });
 
         console.log('submitSurveyXml______>', raw)
-
+   
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
@@ -1408,36 +1490,60 @@ const BlockBSurveyScreen = () => {
                                         itemBackground="#000"
                                         styleTextDropdownSelected={{ color: '#000', paddingLeft: 8, fontSize: 16 }}
                                     />
-                                    {/* <View>
-                                    {selectedAccountLabels.map((label, index) => (
-                                        <View style={{ padding: 8, flexDirection: 'row', flexWrap: 'wrap' }}>
-                                            <Text key={index} style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                        </View>
-                                    ))}
-                                </View> */}
 
-                                    {/* <View>
-                                        {selectedAccountLabels.map((label, index) => (
-                                            // <TextInput onChangeText={(e) => commentInputOnChange(index, e)} maxLength={2} style={{ backgroundColor: '#fff', paddingLeft: 15, elevation: 5, borderRadius: 5, marginTop: 10 }} keyboardType={'number-pad'} placeholder={label} />
-                                            <TextInput onChangeText={(value) => commentInputOnChange(index, Number(value))} maxLength={2} style={{ backgroundColor: '#fff', paddingLeft: 15, elevation: 5, borderRadius: 5, marginTop: 10 }} keyboardType={'number-pad'} placeholder={label} />
-                                            
-                                        ))}
-
-                                    </View> */}
                                     <View>
-                                        {selectedAccountLabels?.map((label, index) => (
-                                            <View key={index} style={{ padding: 8, }}>
-                                                <Text style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
-                                                <TextInput
-                                                    onChangeText={(value) => commentInputOnChange(index, value)}
-                                                    maxLength={2}
-                                                    style={{ backgroundColor: '#fff', paddingLeft: 15, borderRadius: 5, marginTop: 10, borderColor: errorMessages[index] !== '' ? 'red' : '#DFDFDF', borderWidth: 1.8 }}
-                                                    keyboardType={'number-pad'}
-                                                    placeholder={label}
-                                                />
-                                                {errorMessages[index] !== '' && <Text style={{ color: 'red', paddingTop: 5, paddingLeft: 5 }}>{errorMessages[index]}</Text>}
-                                            </View>
-                                        ))}
+                                        {selectedAccountLabels?.map((label, index) => {
+                                            console.log("labelll", label)
+                                            return (
+                                                <View key={index} style={{ padding: 8, }}>
+                                                    <Text style={{ color: '#000', borderColor: '#DFDFDF', borderWidth: 0.8, padding: 10 }}>{label}</Text>
+                                                    {label === 'Savings Account' && <TextInput
+                                                        value={acc1}
+                                                        onChangeText={(value) => commentInputOnChange(index, value, label)}
+                                                        maxLength={2}
+                                                        style={{ backgroundColor: '#fff', paddingLeft: 15, borderRadius: 5, marginTop: 10, borderColor: errorMessages[index] !== '' ? 'red' : '#DFDFDF', borderWidth: 1.8 }}
+                                                        keyboardType={'number-pad'}
+                                                        placeholder={'Savings Account'}
+                                                    />}
+                                                    {label === 'PMJDY Account' && <TextInput
+                                                        value={acc2}
+                                                        onChangeText={(value) => commentInputOnChange(index, value, label)}
+                                                        maxLength={2}
+                                                        style={{ backgroundColor: '#fff', paddingLeft: 15, borderRadius: 5, marginTop: 10, borderColor: errorMessages[index] !== '' ? 'red' : '#DFDFDF', borderWidth: 1.8 }}
+                                                        keyboardType={'number-pad'}
+                                                        placeholder={'PMJDY Account'}
+                                                    />}
+                                                    {label === 'Current Account' && <TextInput
+                                                        value={acc3}
+                                                        onChangeText={(value) => commentInputOnChange(index, value, label)}
+                                                        maxLength={2}
+                                                        style={{ backgroundColor: '#fff', paddingLeft: 15, borderRadius: 5, marginTop: 10, borderColor: errorMessages[index] !== '' ? 'red' : '#DFDFDF', borderWidth: 1.8 }}
+                                                        keyboardType={'number-pad'}
+                                                        placeholder={'Current Account'}
+                                                    />}
+                                                    {label === 'FD/RD Account' && <TextInput
+                                                        value={acc4}
+                                                        onChangeText={(value) => commentInputOnChange(index, value, label)}
+                                                        maxLength={2}
+                                                        style={{ backgroundColor: '#fff', paddingLeft: 15, borderRadius: 5, marginTop: 10, borderColor: errorMessages[index] !== '' ? 'red' : '#DFDFDF', borderWidth: 1.8 }}
+                                                        keyboardType={'number-pad'}
+                                                        placeholder={'FD/RD Account'}
+                                                    />}
+                                                    {label === 'Credit (Loan) Account' && <TextInput
+                                                        value={acc5}
+                                                        onChangeText={(value) => commentInputOnChange(index, value, label)}
+                                                        maxLength={2}
+                                                        style={{ backgroundColor: '#fff', paddingLeft: 15, borderRadius: 5, marginTop: 10, borderColor: errorMessages[index] !== '' ? 'red' : '#DFDFDF', borderWidth: 1.8 }}
+                                                        keyboardType={'number-pad'}
+                                                        placeholder={'Credit (Loan) Account'}
+                                                    />}
+
+                                                    {errorMessages[index] !== '' && <Text style={{ color: 'red', paddingTop: 5, paddingLeft: 5 }}>{errorMessages[index]}</Text>}
+                                                </View>
+                                            )
+                                        }
+
+                                        )}
                                     </View>
                                     <View style={{ padding: 10, }} />
 
