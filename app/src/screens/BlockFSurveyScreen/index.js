@@ -563,7 +563,7 @@ const BlockFSurveyScreen = () => {
         let API_UPLOAD_MSG_FILE = `https://scslsurvey.online/SCSL-SURVEY/public/api/survey-audio-files`;
         const path = `file://${file}`;
         const formData = new FormData();
-        formData.append('survey_token', name);
+        formData.append("survey_token", name);
         formData.append('sec_no', 'F');
         formData.append('audio_file', {
             uri: path,
@@ -581,7 +581,7 @@ const BlockFSurveyScreen = () => {
                 body: formData,
             });
             const json = await res.json();
-            console.log("jsonn>>",json)
+            console.log("jsonn>>", json)
             setAudioUploading(false);
             showMessage({
                 message: "Audio Upload",
@@ -1367,7 +1367,7 @@ const BlockFSurveyScreen = () => {
 
     const saveSurveryAndMoveToNext = async () => {
         AsyncStorage.setItem(AsyncStorageContaints.surveyNextBlock, '');
-        // navigation.replace('DashboardScreen');
+        navigation.replace('DashboardScreen');
         setSubmitSurvey(true);
         // saveSurveyCount();
     }
